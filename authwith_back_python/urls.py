@@ -25,12 +25,13 @@ from rest_framework_swagger.views import get_swagger_view
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from main.views import UserViewSet
+from main.views import UserViewSet, MyModelViewSet, somi
 
 schema_view = get_swagger_view(title='Pastebin API')
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'mymodel', MyModelViewSet)
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -52,6 +53,7 @@ urlpatterns = [
                   path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
                   path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
                   path('api/v1/', include(router.urls)),
+                  path('test/<int:some>', somi),
                   # path('openapi/', get_schema_view(
                   #     title="Your Project",
                   #     description="API for all things …",
